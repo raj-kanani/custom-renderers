@@ -10,4 +10,4 @@ class ImageAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',), }
 
 
-admin.site.register(Category)
+admin.site.register(Student)

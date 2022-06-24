@@ -38,16 +38,19 @@ INSTALLED_APPS = [
     'myapp',
     'rest_framework',
     "debug_toolbar",
+
 ]
 
 # Config preference order
 REST_FRAMEWORK = {
+
     'DEFAULT_RENDERER_CLASSES': (
+        # 'myapp.renderers.ApiRenderer',
         # 'rest_framework_yaml.renderers.YAMLRenderer',
         # 'rest_framework_xml.renderers.XMLRenderer',
         'rest_framework.renderers.JSONRenderer',
-        # 'rest_framework_jsonp.renderers.JSONPRenderer',
-
+        # # 'myapp.renderers.JSONRenderer',
+        # # 'rest_framework_jsonp.renderers.JSONPRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
         # 'myapp.renderers.TsvRenderer',
 

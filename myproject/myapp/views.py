@@ -11,7 +11,7 @@ from .renderers import *
 class StudentView(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    renderer_classes = [CustomJSONRenderers1]
+    renderer_classes = [CustomRenderer1]
     # renderer_classes = [custom_exception]
 
 # class UserCountView(APIView):
