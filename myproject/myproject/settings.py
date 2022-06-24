@@ -40,13 +40,19 @@ INSTALLED_APPS = [
     "debug_toolbar",
 ]
 
-# Conneg preference order
+# Config preference order
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
+        # 'rest_framework_yaml.renderers.YAMLRenderer',
+        # 'rest_framework_xml.renderers.XMLRenderer',
         'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework_jsonp.renderers.JSONPRenderer',
+
         'rest_framework.renderers.BrowsableAPIRenderer',
         # 'myapp.renderers.TsvRenderer',
-    )
+
+    ),
+    'EXCEPTION_HANDLER': 'myapp.renderers.custom_exception',
 }
 
 MIDDLEWARE = [
