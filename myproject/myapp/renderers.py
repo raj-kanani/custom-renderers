@@ -35,36 +35,50 @@ from rest_framework.views import exception_handler
 class CustomRenderer1(renderers.JSONRenderer):
     def render(self, data, accepted_media_type=None, renderer_context=None):
         status_code = renderer_context['response'].status_code
-        print(status_code, 'my status edjkvdnvebjvedbveb vre')
         # charset = 'utf-8'
         # import pdb
         # pdb.set_trace()
+        # if status_code == 200:
+        #     # status_code = {
+        #     #     'code': status_code,
+        #     #     'message': renderer_context['response'].status_text,
+        #     #     'data': data,
+        #     #     }
+        #     status_code = {"message": "success", "errors": [], "data": data, "status": "success"}
+        #     print('new status code.............')
+        # else:
+        #     print('hello testing purpose ')
+        # return super().render(data, accepted_media_type=accepted_media_type,
+        #                       renderer_context=renderer_context)
 
-        if status_code == 200:
-            # status_code = {
-            #     'code': status_code,
-            #     'message': renderer_context['response'].status_text,
-            #     'data': data,
-            #     }
-            status_code = {"message": "success", "errors": [], "data": data, "status": "success"}
-            print('new status code.............')
+        if 'ErrorDetail' in str(data):
+            # response = json.dumps({'errors': data})
+            response = {
+                'code': 400,
+                'message': 'failed',
+            }
+        elif status_code == 200:
+            print(status_code, 'my status 200 success')
+            response = {
+                'code': status_code,
+                'message': 'success',
+                'data': data,
+            }
+        elif status_code == 300:
+            print(status_code, '300 - data found ')
+            response = {
+                'code': 300,
+                'message': 'data found',
+                'data': data,
+            }
         else:
-            print('ciucheebwdwcwcewcewew hello ')
+            print('500 internet server error')
+            response = {
+                'code': 500,
+                'message': 'Internet server error',
+            }
         return super().render(data, accepted_media_type=accepted_media_type,
                               renderer_context=renderer_context)
-
-        # if 'ErrorDetail' in str(data):
-        #     # response = json.dumps({'errors': data})
-        #     response = {
-        #         'code': 400,
-        #         'message': 'failed',
-        #     }
-        # else:
-        #     response = {
-        #         'code': status_code,
-        #         'message': 'Success',
-        #         'data': data,
-        #     }
 
 
 class CustomRenderers(renderers.JSONRenderer):
